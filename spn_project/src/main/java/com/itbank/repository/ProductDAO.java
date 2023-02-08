@@ -9,6 +9,6 @@ import com.itbank.model.ProductDTO;
 @Repository
 public interface ProductDAO {
 
-	List<ProductDTO> selectList();
+	List<ProductDTO> selectList(String cat);
 	
 }

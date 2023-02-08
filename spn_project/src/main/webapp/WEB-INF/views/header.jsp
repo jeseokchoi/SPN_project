@@ -9,26 +9,41 @@
 <meta charset="UTF-8">
 <title>서평랭</title>
 <style>
-	.leftTitle {
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
+	ul > li {
+		list-style:none;
 		cursor: pointer;
 		font-size: 24px;
+		padding-left: 0px;
+		padding: 10px 0;
+		font-size: 17px;
+    	font-weight: 600; 
+    	color: #000;
+    	letter-spacing: 0.01em;
 	}
-    .content {
-        border: 1px solid black;
-        box-sizing: border-box;
-        z-index: -1;
-
-        padding: 0;
-        height: 0;
+    .dropDown {
+    	padding: 0;
+         z-index: -1; 
+        height: 0px;
+        transition-duration: 0.5s;
+         overflow: hidden; 
         opacity: 0;
-        transition-duration: 0.5s;
     }
-	.content.selected {
-	    padding: 20px;
-        height: auto;
-        opacity: 1;
+	.dropDown.selected {
+		opacity: 1;
+        height: 300px;
+        max-height: 1200px;
         transition-duration: 0.5s;
 	}
+	ol > li {
+		font-size: 15px;
+		padding: 10px 0;
+
+	}
+	
 </style>
 </head>
 <body>
@@ -39,31 +54,84 @@
 <nav>
 	<ul>
 		<li>
-			<div class="leftTitle">Man</div>
-			<div class="content"><a href="${cpath }/board/man/top">Top</a></div>
+			WOMAN
+			<ol class="dropDown">
+				<li><a href="${cpath }/board/w_">All</a></li>
+				<li><a href="${cpath }/board/w_outer">Outer</a></li>
+				<li><a href="${cpath }/board/w_shirts">Shirts</a></li>
+				<li><a href="${cpath }/board/w_top">Top</a></li>
+				<li><a href="${cpath }/board/w_bottom">Bottom</a></li>
+				<li><a href="${cpath }/board/w_knit">Knit</a></li>
+			</ol>
 		</li>
+		<li>
+			MAN
+			<ol class="dropDown">
+				<li><a href="${cpath }/board/m_">All</a></li>
+				<li><a href="${cpath }/board/m_top">top</a></li>
+				<li><a href="${cpath }/board/m_suit">Suit</a></li>
+				<li><a href="${cpath }/board/m_outer">Outer</a></li>
+				<li><a href="${cpath }/board/m_top">Top</a></li>
+				<li><a href="${cpath }/board/m_knit">Knit</a></li>
+				<li><a href="${cpath }/board/m_shirts">Shirts</a></li>
+				<li><a href="${cpath }/board/m_pants">Pants</a></li>
+				<li><a href="${cpath }/board/m_shoes">Shoes</a></li>
+			</ol>
+		</li>
+<!-- 		<li> -->
+<!-- 			<div class="MTitle">Man</div> -->
+<!-- 			<div class="content">Suit</div> -->
+<!-- 			<div class="content">Outer</div> -->
+<%-- 			<div class="content"><a href="${cpath }/board/man/top">Top</a></div> --%>
+<!-- 			<div class="content">Knit</div> -->
+<!-- 			<div class="content">Shirts</div> -->
+<!-- 			<div class="content">Pants</div> -->
+<!-- 			<div class="content">Shoes</div> -->
+<!-- 		</li> -->
+<!-- 		<li> -->
+<!-- 			<div class="BTitle">BOARD</div> -->
+<!-- 			<div class="content">Notice</div> -->
+<!-- 			<div class="content">Q & A</div> -->
+<!-- 		</li> -->
+<!-- 		<li> -->
+<!-- 			<div class="leftTitle">ABOUT</div> -->
+<!-- 			<div class="content">Map</div> -->
+<!-- 			<div class="content">About Us</div> -->
+<!-- 		</li> -->
 	</ul>
 </nav>
 
-
+<!-- <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script> -->
 <script>
-    const leftTitleArray = Array.from(document.querySelectorAll('.leftTitle'))
-    const contentList = document.querySelectorAll('.content')
+    const leftTitleArray = Array.from(document.querySelectorAll('ul > li'))
+    const olList = document.querySelectorAll('ol')
 
     function clickHandler(event) {
-        const i = leftTitleArray.indexOf(event.target)
-        const content = contentList[i];
-
-        if(content.classList.contains('selected')) {
-            content.classList.remove('selected')
-            return
-        }
-
-        contentList.forEach(c => c.classList.remove('selected'))
-        content.classList.add('selected')
-    } 
+    	const dropDown = event.target.querySelector('ol')
+    	if(dropDown.classList.contains('selected')){
+    		dropDown.classList.remove('selected')
+    		return
+    	}
+    	olList.forEach(e => e.classList.remove('selected'))
+    	
+    	
+    	dropDown.classList.add('selected')
+     } 
 
     leftTitleArray.forEach(t => t.onclick = clickHandler)
+
+// 	$('ul > li').on('click', function(e) {
+// 		const dropDown = event.target.querySelector('ol')
+// 		if(dropDown.classList.contains('selected')){
+//     		dropDown.classList.remove('selected')
+//     		return
+//     	}
+// 		olList.forEach(e => e.classList.remove('selected'))
+		
+// 		dropDown.classList.add('selected')
+// 		$(dropDwon).show()
+// 		$(dropDown).slideDown()
+// 	})
 </script>
 
 

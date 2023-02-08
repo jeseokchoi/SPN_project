@@ -5,8 +5,11 @@
 	
 <mapper namespace="com.itbank.repository.ProductDAO">
 
-	<select id="selectList" resultType="product">
-		select * from product order by product_idx
+	<select id="selectList" resultType="product" parameterType="string">
+		select * 
+		from product
+		where product_code like '${cat}%' 
+		order by product_idx desc
 	</select>
 
 

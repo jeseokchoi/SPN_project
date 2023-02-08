@@ -14,8 +14,8 @@ public class ProductService {
 	@Autowired
 	private ProductDAO dao;
 
-	public List<ProductDTO> getList() {
-		return dao.selectList();
+	public List<ProductDTO> getList(String cat) {
+		return dao.selectList(cat);
 	}
 
 }
