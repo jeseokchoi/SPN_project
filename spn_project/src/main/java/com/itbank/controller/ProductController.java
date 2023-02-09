@@ -19,7 +19,7 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
-	@GetMapping("/{cat}")
+	@GetMapping("/list/{cat}")
 	public ModelAndView productList(@PathVariable("cat") String cat) {
 		ModelAndView mav = new ModelAndView("/board/productList");
 		List<ProductDTO> list = productService.getList(cat);
@@ -30,9 +30,19 @@ public class ProductController {
 		}else {
 			s = "ALL";
 		}
+		System.out.println();
 		mav.addObject("category",s);
-		
 		mav.addObject("list", list);
+		return mav;
+	}
+	@GetMapping("/view/{idx}")
+	public ModelAndView viewItem(@PathVariable("idx") int idx) {
+		ModelAndView mav = new ModelAndView("/board/view");
+		ProductDTO dto = productService.getDTO(idx);
+		System.out.println(dto.getProduct_t_img());
+		System.out.println("------------");
+		System.out.println(dto.getProduct_d_img());
+		mav.addObject("dto", dto);
 		return mav;
 	}
 }

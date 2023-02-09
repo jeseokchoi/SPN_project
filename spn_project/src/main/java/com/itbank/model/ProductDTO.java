@@ -1,6 +1,9 @@
 package com.itbank.model;
 
 import java.sql.Date;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class ProductDTO {
 
@@ -13,10 +16,47 @@ public class ProductDTO {
 	private int product_hits;
 	private String delete_check;
 	private String show_check;
+	private List<MultipartFile> upload_t_file;
+	private List<MultipartFile> upload_d_file;
+	private List<String> product_t_img;
+	private List<String> product_d_img;
 	
 	public int getProduct_idx() {
 		return product_idx;
 	}
+	
+	public List<MultipartFile> getUpload_t_file() {
+		return upload_t_file;
+	}
+
+	public void setUpload_t_file(List<MultipartFile> upload_t_file) {
+		this.upload_t_file = upload_t_file;
+	}
+
+	public List<MultipartFile> getUpload_d_file() {
+		return upload_d_file;
+	}
+
+	public void setUpload_d_file(List<MultipartFile> upload_d_file) {
+		this.upload_d_file = upload_d_file;
+	}
+
+	public List<String> getProduct_t_img() {
+		return product_t_img;
+	}
+
+	public void setProduct_t_img(List<String> product_t_img) {
+		this.product_t_img = product_t_img;
+	}
+
+	public List<String> getProduct_d_img() {
+		return product_d_img;
+	}
+
+	public void setProduct_d_img(List<String> product_d_img) {
+		this.product_d_img = product_d_img;
+	}
+
 	public void setProduct_idx(int product_idx) {
 		this.product_idx = product_idx;
 	}
