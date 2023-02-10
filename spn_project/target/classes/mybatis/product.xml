@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.itbank.repository.ProductDAO">
+
+	<select id="selectList" resultType="product" parameterType="string">
+		select * 
+		from product
+		where product_code like '${cat}%' 
+		order by product_idx desc
+	</select>
+	
+	<select id="select_t_img" resultType="string" parameterType="string">
+		select product_t_img
+		from product P
+    		join product_t_img T
+        		on 
+    		P.product_idx = T.product_idx
+		where product_code like '${cat}%'
+		order by P.product_idx desc
+	</select>
+
+	<select id="selectOne" resultType="product" parameterType="int">
+		select *
+		from product
+		where product_idx = ${idx}
+	</select>
+	
+	<select id="selectTImgList" resultType="string" parameterType="int">
+		select *
+		from product_t_img
+		where product_idx = ${idx}
+	</select>
+	
+	<select id="selectDImgList" resultType="string" parameterType="int">
+		select *
+		from product_d_img
+		where product_idx = ${idx}
+	</select>
+	
+	<insert id="insertProductDTO" parameterType="product">
+		insert into product(product_code,product_name,product_price)
+		values(#{product_code}, #{product_name}, #{product_price})
+	</insert>
+	
+	<select id="selectProductIdx" parameterType="product" resultType="int">
+		select product_idx
+		from product
+		where product_name = #{product_name}
+	</select>
+	
+	<insert id="insertTImg" parameterType="hashmap">
+		insert into product_t_img
+		values(#{fileName}, ${product_idx})
+	</insert>
+	
+	<insert id="insertDImg" parameterType="hashmap">
+		insert into product_d_img
+		values(#{fileName}, ${product_idx})
+	</insert>
+
+	<select id="selectOpt" resultType="product_opt" parameterType="hashmap">
+		select *
+		from product_opt
+		where product_idx = ${product_idx} and product_color = #{color}
+	</select>
+
+</mapper>

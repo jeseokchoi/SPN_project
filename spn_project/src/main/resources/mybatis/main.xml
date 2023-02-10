@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC 
+	"-//mybatis.org//DTD Config 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="useGeneratedKeys" value="false" />
+		<setting name="mapUnderscoreToCamelCase" value="false" />
+	</settings>
+	
+	<typeAliases>
+		<typeAlias type="com.itbank.model.ProductDTO" alias="product"/>
+		<typeAlias type="com.itbank.model.Product_optDTO" alias="product_opt"/>
+		<typeAlias type="com.itbank.model.Product_t_imgDTO" alias="product_t_img"/>
+		<typeAlias type="com.itbank.model.CartDTO" alias="cart"/>
+		
+		<typeAlias type="com.itbank.model.UserDTO" alias="user"/>
+	</typeAliases>
+	
+</configuration>
