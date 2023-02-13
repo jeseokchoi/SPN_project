@@ -18,7 +18,7 @@
 			<thead>
 				<tr>
 					<th scope="col">
-						<input type="checkbox" onclick="">
+						<input type="checkbox">
 					</th>
 					<th scope="col">이미지</th>
 					<th scope="col">상품정보</th>

@@ -27,6 +27,7 @@
 			<list>
 				<value>classpath:mybatis/product.xml</value>
 				<value>classpath:mybatis/user.xml</value>
+				<value>classpath:mybatis/cart.xml</value>
 			</list>
 		</property>
 	</bean>

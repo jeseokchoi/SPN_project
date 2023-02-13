@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
-
+<main>
+<section>
 <div id="root">
 	<div id="wrap">
 		<form method="POST" id="loginForm">
@@ -11,6 +12,8 @@
 		</form>
 	</div>
 </div>
+</section>
+</main>
 
 </body>
 </html>

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.component.HashComponent;
+import com.itbank.model.DeliverAddressDTO;
 import com.itbank.model.UserDTO;
 import com.itbank.service.UserService;
 
@@ -43,8 +44,8 @@ public class UserContoller{
 	//로그인후 세션에 user 라는 이름으로 600초간 등록. 
 	public ModelAndView login(UserDTO dto, String url, HttpSession session) {
 		
-//		String pwd = hashcomponent.getHash(dto.getUser_pwd());
-//		dto.setUser_pwd(pwd);
+		String pwd = hashcomponent.getHash(dto.getUser_pwd());
+		dto.setUser_pwd(pwd);
 				
 		UserDTO user = userService.login(dto);
 		if(user == null) {
@@ -109,5 +110,24 @@ public class UserContoller{
 			return "redirect:/user/login";				
 		}
 		return "/user/mypage";	//
+	}
+	
+	@GetMapping("/deliverAddress/{user_id}")
+	public ModelAndView address(HttpSession session) {
+		ModelAndView mav = new ModelAndView("/user/deliverAddress");
+		String userId = ((UserDTO)session.getAttribute("user")).getUser_id();
+		DeliverAddressDTO address = userService.getOne(userId);
+		mav.addObject("address",address);
+		return mav;		
+	}
+	@GetMapping("/addressRegist")
+	public void addressRegist() {}
+	
+	@PostMapping("/addressRegist")
+	public String addressRegist(DeliverAddressDTO dto,HttpSession session) {
+		dto.setUser_id(((UserDTO)session.getAttribute("user")).getUser_id());
+		int row  = userService.addressRegist(dto);
+		System.out.println(row==1?"배송지추가완료":"배송지추가실패");
+		return "redirect:/user/mypage";
 	}
 }

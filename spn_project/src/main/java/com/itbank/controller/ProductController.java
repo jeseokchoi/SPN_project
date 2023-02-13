@@ -19,6 +19,7 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
+	
 	@GetMapping("/list/{cat}")
 	public ModelAndView productList(@PathVariable("cat") String cat) {
 		ModelAndView mav = new ModelAndView("/board/productList");
@@ -45,6 +46,4 @@ public class ProductController {
 		mav.addObject("dto", dto);
 		return mav;
 	}
-	
-	@GetMapping("/order/")
 }

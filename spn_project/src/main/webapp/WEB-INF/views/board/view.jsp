@@ -2,46 +2,53 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp"%>
 
-
+<main>
 <section id="viewItem">
-	<div>
-		<c:forEach var="t_img" items="${dto.product_t_img }">
-			<img src="${cpath}/itemImg/${t_img}" height="150px">
-		</c:forEach>
+
+	<div class="viewItemInfo">
+		<div class="viewItemThumbnail">
+			<ul>
+				<c:forEach var="t_img" items="${dto.product_t_img }">
+					<li><img class="vit" src="${cpath}/itemImg/${t_img}"
+						height="110px" width="90px"></li>
+				</c:forEach>
+			</ul>
+		</div>
+
+		<div class="viewItemMainThumbnail">
+			<img src="${cpath}/itemImg/${dto.product_t_img[0]}">
+		</div>
+
+		<div id="viewItemDetails">
+			<div id="viewItemName">${dto.product_name }</div>
+			<div id="viewItemPrice">${dto.product_price }</div>
+
+				<select name="product_color">
+					<option value="">-[필수]옵션을 선택해주세요-</option>
+					<option>아이보리</option>
+					<option>소라</option>
+					<option>블랙</option>
+				</select> <select name="product_size">
+					<option>-[필수]옵션을 선택해주세요-</option>
+				</select>
+			<!-- 옵션 선택된 아이탬 정보 출력 -->
+			<div class="buy">
+				<input type="hidden" name="product_idx" value="${dto.product_idx }">
+			</div>
+			<!-- 옵션선택 완료된 아이탬 총 금액 출력 -->
+			<form method="POST" action="${cpath }/board/cart/${empty login ? 'nonUser' : 'user'}">
+			<div class="buyPrice">
+			
+			</div>
+			<input type="hidden" name="product_opts" value="">
+			<div class="btnSubmit">
+				<a href="${cpath }/board/order" name="btnBuy"><span>구매하기</span></a>
+				<input type="submit" value="장바구니담기">
+			</div>
+			</form>
+		</div>
 	</div>
 	<div>
-		${dto.product_name }
-	</div>
-	<div>
-		${dto.product_price }
-	</div>
-	
-	<form>
-		<select name="product_color">
-			<option value="">-[필수]옵션을 선택해주세요-</option>
-			<option>아이보리</option>
-			<option>소라</option>
-			<option>블랙</option>
-		</select>
-		<select name="product_size">
-			<option>-[필수]옵션을 선택해주세요-</option>
-		</select>
-	</form>
-	<!-- 옵션 선택된 아이탬 정보 출력 -->
-	<div class="buy">
-		<input type="hidden" name="product_idx" value="${dto.product_idx }">
-	</div>
-	<!-- 옵션선택 완료된 아이탬 총 금액 출력 -->
-	<div class="buyPrice">
-	
-	</div>
-	
-	<div class="btnSubmit">
-		<a href="${cpath }/board/list/order" name="btnBuy"><span>구매하기</span></a>
-		<a href="" name="btnCart"><span>장바구니</span></a>
-	</div>
-	<div>
-	
 		<c:forEach var="d_img" items="${dto.product_d_img }">
 			<img src="${cpath}/itemImg/${d_img}" width="1000px">
 		</c:forEach>
@@ -83,8 +90,9 @@
 			const selectedItem = document.createElement('div')
 			selectedItem.className = 'selectedItem'
 			let html = '<div class="itemName">' + '${dto.product_name}' + '</div>'
+			html += '<input type="hidden" name="product_idx" value="' + ${dto.product_idx} + '"'
 			html += '<div class="itemOpt">'+ color.value + '/' + size.value + '</div>'
-			html += '<input type="number" name="' + color.value + '/' + size.value + '" value="1" min="1" required>'
+			html += '<input type="number" name="product_count" value="1" min="1" required>'
 			html += '<div class="totalPrice">' + ${dto.product_price} + '</div>'
 			selectedItem.innerHTML = html
 			buy.appendChild(selectedItem)
@@ -128,22 +136,41 @@
 		}
 		else{
 			num.forEach(e => {
-				console.log('e = ', e.innerText)
 				sum += +e.innerText
 		})
-				return sum
+				return sum.toLocaleString()
 		}
 	}
 
 	size.onchange = buyCheck
 	
-	
-	
-
-	
-	
-	
 </script>
 
+<script>
+	const viewItemMainThumbnail = document.querySelector('div.viewItemMainThumbnail')
+	const vitList = document.querySelectorAll('img.vit')
+	
+	function changeMainImg(event) {
+		console.log(event.target)
+		viewItemMainThumbnail.innerHTML = '<img src="' + event.target.getAttribute('src') + '">'
+	}
+	vitList.forEach(e => e.onmouseover = changeMainImg)
+	
+	const form1 = document.forms[0]
+	console.log({form1:form1})
+	form1.onsubmit = function(event) {
+		event.preventDefault()
+		const inputProduct_opts = document.querySelector('input[name="product_opts"]').value
+		
+		const itemOptDiv = document.querySelectorAll('div.itemOpt')
+		let tmp = ''
+		itemOptDiv.forEach( e => {
+			const eText = e.innerText
+		tmp += eText + '.'
+		})
+ 		event.target.submit()
+	}
+	
+</script>
 </body>
 </html>

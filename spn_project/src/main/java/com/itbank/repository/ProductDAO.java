@@ -31,5 +31,7 @@ public interface ProductDAO {
 	int insertTImg(HashMap<String, String> param);
 
 	int insertDImg(HashMap<String, String> param);
+
+	List<Product_t_imgDTO> selectHomeList();
 	
 }

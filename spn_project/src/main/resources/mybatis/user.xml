@@ -20,5 +20,19 @@ values
 	select count(user_id) from userTable where user_id = #{inputId}
 </select>
 
+<select id="selectList" parameterType="String" resultType="address">
+	select * from deliver_address where user_id = #{user_id}
+</select>
+
+<insert id="insertAddress" parameterType="address">
+	insert into deliver_address(user_id, user_address1, user_address2, user_address3)
+	values (#{user_id}, #{user_address1}, #{user_address2}, #{user_address3})
+</insert>
+
+<select id="addressOne" parameterType="string" resultType="address">
+	select * from deliver_address where user_id = #{userId}
+</select>
+
+
 
 </mapper>

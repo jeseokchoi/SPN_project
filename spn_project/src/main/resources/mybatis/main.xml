@@ -14,9 +14,11 @@
 		<typeAlias type="com.itbank.model.ProductDTO" alias="product"/>
 		<typeAlias type="com.itbank.model.Product_optDTO" alias="product_opt"/>
 		<typeAlias type="com.itbank.model.Product_t_imgDTO" alias="product_t_img"/>
-		<typeAlias type="com.itbank.model.CartDTO" alias="cart"/>
 		
 		<typeAlias type="com.itbank.model.UserDTO" alias="user"/>
+		<typeAlias type="com.itbank.model.DeliverAddressDTO" alias="address"/>
+		
+		<typeAlias type="com.itbank.model.CartDTO" alias="cart"/>
 	</typeAliases>
 	
 </configuration>

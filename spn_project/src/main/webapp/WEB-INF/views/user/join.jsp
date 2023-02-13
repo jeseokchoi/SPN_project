@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
 
+<main>
+<section>
 <form method="POST" id="joinForm">
 	
 	<fieldset>
@@ -9,7 +11,7 @@
 	<p>
 		<label>
 			[필수]이용약관 동의
-			<input type="checkbox" name="agreement" required>
+			<input type="checkbox" name="agreement">
 		</label>
 	</p>
 	</fieldset>
@@ -19,7 +21,7 @@
 	<p>
 		<label>
 			[필수]개인정보 수집 및 이용 동의
-			<input type="checkbox" name="agreement" required>
+			<input type="checkbox" name="agreement">
 		</label>
 	</p>
 	</fieldset>
@@ -29,7 +31,7 @@
 	<p>
 		<label>
 			[필수]쇼핑정보 수신 동의
-			<input type="checkbox" name="agreement" required>
+			<input type="checkbox" name="agreement">
 		</label>
 	</p>
 	</fieldset>
@@ -58,9 +60,11 @@
 		<label><input type="radio" name="user_gender" value="남성" required>남성</label>
 		<label><input type="radio" name="user_gender" value="여성" required>여성</label>
 	</p>
-	<p><input type="submit" value="회원 가입" disabled></p>
+	<p><input type="submit" value="회원 가입"></p>
 	
 </form>
+</section>
+</main>
 
 <script>
 
@@ -126,15 +130,29 @@
 </script>
 
  <script>
- 		console.log(dupResult.innerText)
-        const agreeLabels = Array.from(document.querySelectorAll('input[name="agreement"]'))
-        const btnSubmit = document.querySelector('input[type="submit"]')
-        
-        pw2Check.innerText.onchange = function(event){
-        if(pw1Check.innerText == '사용가능합니다.' && pw2Check.innerText == '사용가능합니다' && dupResult.innerText == '사용 가능한 ID입니다'){
-            btnSubmit.removeAttribute('disabled')
-        }
+         const btnSubmit = document.querySelector('input[type="submit"]')
+        		
+ 		btnSubmit.onclick = function(event){
+        	const agreeLabels = document.querySelectorAll('input[name="agreement"]:checked').length == 3 ? true : false
+     		if(agreeLabels == false){
+         		alert('약관을 동의해주세요')
+         		event.preventDefault()
+         		return
+         	}if(pw1Check.innerText != '사용가능합니다.'){
+ 				alert('비밀번호는 영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 8자~16자.로 작성되어야 합니다.')
+ 				event.preventDefault()
+ 				return
+ 			}if(pw2Check.innerText != '사용가능합니다'){
+ 				alert('비밀번호를 확인해주세요')
+ 				event.preventDefault()
+ 				return
+ 			}if(dupResult.innerText != '사용 가능한 ID입니다'){
+ 				alert('아이디를 확인해주세요')
+ 				event.preventDefault()
+ 				return
+ 			}
  		}
+        
     </script>
     
 

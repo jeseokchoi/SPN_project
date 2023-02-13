@@ -4,8 +4,19 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="com.itbank.repository.CartDAO">
-	<select id="getCartList" parameterType="cart" resultType="int">
-		
+	<select id="getCartList" parameterType="int" resultType="product_opt">
+		select *
+    	from (
+    		select product_opt_idx, product_name, product_price, product_size, product_color
+        	from product P
+            	join product_opt O
+                	on
+            	P.product_idx = O.product_idx
+            where product_opt_idx = ${product_opt_idx}) A
+            	
+            join cart B
+            	on
+            A.product_opt_idx = B.product_opt_idx
 	</select>
 	
 </mapper>	

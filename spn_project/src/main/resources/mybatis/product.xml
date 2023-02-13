@@ -18,7 +18,7 @@
     		join product_t_img T
         		on 
     		P.product_idx = T.product_idx
-		where product_code like '${cat}%'
+		where product_code like '${cat}%' and product_t_img like '%_t_1.%'
 		order by P.product_idx desc
 	</select>
 
@@ -65,6 +65,15 @@
 		select *
 		from product_opt
 		where product_idx = ${product_idx} and product_color = #{color}
+	</select>
+	
+	<select id="selectHomeList" resultType="product_t_img">
+		select * 
+        from product_t_img
+        where product_t_img like '%_t_1.%'
+        order by product_idx desc
+        
+        fetch first 4 rows only
 	</select>
 
 </mapper>
